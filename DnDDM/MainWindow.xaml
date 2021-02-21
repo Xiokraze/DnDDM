@@ -1,0 +1,17 @@
+﻿<Window x:Class="DnDDM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DnDDM"
+        mc:Ignorable="d"
+        Title="DnD DM" Height="450" Width="800">
+    <Grid>
+        <Menu x:Name="mainMenu" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0" Height="35" Background="#FF030303"  Foreground="#FFF7CE65" FontWeight="Bold">
+            <MenuItem Header="Spells" Height="35" Width="auto"/>
+            <MenuItem Header="Items" Height="35" Width="auto"/>
+        </Menu>
+        <ContentControl x:Name="contentControl" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+    </Grid>
+</Window>
