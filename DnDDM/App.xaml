@@ -4,13 +4,18 @@
              xmlns:local="clr-namespace:DnDDM"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
+        <!--Sources/References-->
+        <!--https://www.jimnuzzi.com/2008/06/29/wpf-xaml-menuitem-styles/-->
+        
+        
+        <!--Button-->
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
-            <!--<Setter Property="Background" Value="Transparent" />-->
             <Setter Property="Foreground" Value="#F7CE65" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="ButtonBackground" BorderBrush="#F7CE65">
+                        <Border x:Name="buttonBackground" BorderBrush="#F7CE65">
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Border.BorderThickness>2</Border.BorderThickness>
                             <Border.CornerRadius>2</Border.CornerRadius>
@@ -20,12 +25,12 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBackground" Property="Background">
+                                <Setter TargetName="buttonBackground" Property="Background">
                                     <Setter.Value>
                                         <SolidColorBrush Color="#F7CE65" />
                                     </Setter.Value>
                                 </Setter>
-                                <Setter TargetName="ButtonBackground" Property="TextBlock.Foreground">
+                                <Setter TargetName="buttonBackground" Property="TextBlock.Foreground">
                                     <Setter.Value>
                                         <SolidColorBrush Color="#030303" />
                                     </Setter.Value>
@@ -36,5 +41,86 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--Menu Item-->
+        <Style x:Key="menuItemStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        VerticalAlignment="Stretch"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- ContentPresenter to show an Icon if needed -->
+                                <ContentPresenter Grid.Column="0" x:Name="Icon" VerticalAlignment="Center" ContentSource="Icon"/>
+                                <!-- Content for the menu text etc -->
+                                <ContentPresenter Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" x:Name="HeaderHost" RecognizesAccessKey="True" ContentSource="Header"/>
+                                <!-- Arrow drawn path which points to the next level of the menu -->
+                                <Grid Grid.Column="1" x:Name="ArrowPanel" VerticalAlignment="Center">
+                                    <Path x:Name="ArrowPanelPath"/>
+                                </Grid>
+                                <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
+                                <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" >
+                                    <Border x:Name="SubMenuBorder" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}" BorderThickness="2">
+                                        <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
+                                            <!-- StackPanel holds children of the menu. This is set by IsItemsHost=True -->
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Background="#290000"/>
+                                        </Grid>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <!-- These triggers re-configure the four arrangements of MenuItem to show different levels of menu via Role -->
+                        <ControlTemplate.Triggers>
+                            <!-- Role = TopLevelHeader : this is the root menu item in a menu; the Popup expands down -->
+                            <Trigger Property="Role" Value="TopLevelHeader">
+                                <Setter Property="Placement" Value="Bottom" TargetName="SubMenuPopup"/>
+                                <Setter Property="MinWidth" Value="0" TargetName="Col0"/>
+                                <!--<Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>-->
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+                            <!-- Role = TopLevelItem :  this is a child menu item from the top level without any child items-->
+                            <Trigger Property="Role" Value="TopLevelItem">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+                            <!-- Role = SubMenuHeader : this is a child menu item which does not have children -->
+                            <Trigger Property="Role" Value="SubmenuHeader">
+                                <Setter Property="DockPanel.Dock" Value="Top"/>
+                            </Trigger>
+                            <!-- Role = SubMenuItem : this is a child menu item which has children-->
+                            <Trigger Property="Role" Value="SubmenuItem">
+                                <Setter Property="DockPanel.Dock" Value="Top"/>
+                                <Setter Property="Foreground" Value="#F7CE65"/>
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+                            </Trigger>
+                            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                                <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup"/>
+                            </Trigger>
+                            <!-- If no Icon is present the we collapse the Icon Content -->
+                            <!--<Trigger Property="Icon" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+                            </Trigger>-->
+                            <!-- Using the system colors for the Menu Highlight and IsEnabled-->
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Background" Value="Transparent" TargetName="Border"/>
+                                <Setter Property="Foreground" Value="#930C10"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        
     </Application.Resources>
 </Application>
