@@ -25,35 +25,13 @@ namespace DnDDM
             this.contentControl.Content = new SplashControl();
         }
 
-        private void ShowArmorControl(object sender, RoutedEventArgs e)
-        {
+        private void ShowArmorControl(object sender, RoutedEventArgs e) { this.contentControl.Content = new StandardItemControl(DefaultValues.Armor); }
+        private void ShowArtControl(object sender, RoutedEventArgs e){ this.contentControl.Content = new StandardItemControl(DefaultValues.Art); }
+        private void ShowGemsControl(object sender, RoutedEventArgs e) { this.contentControl.Content = new StandardItemControl(DefaultValues.Gem); }
+        private void ShowGoodsControl(object sender, RoutedEventArgs e) { this.contentControl.Content = new StandardItemControl(DefaultValues.Good); }
+        private void ShowWeaponsControl(object sender, RoutedEventArgs e) { this.contentControl.Content = new StandardItemControl(DefaultValues.Weapon); }
+        private void ShowTrinektsControl(object sender, RoutedEventArgs e) { this.contentControl.Content = new StandardItemControl(DefaultValues.Trinket); }
 
-        }
-
-        private void ShowArtControl(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ShowGemsControl(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ShowGoodsControl(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ShowWeaponsControl(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ShowTrinektsControl(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void MouseEnterMenuItem(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -67,11 +45,6 @@ namespace DnDDM
             var item = sender as MenuItem;
             item.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#F7CE65"));
             item.IsSubmenuOpen = false;
-        }
-
-        private void MenuItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
         }
     }
 }

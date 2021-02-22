@@ -41,12 +41,45 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!--DataGrid-->
+        <Style x:Key="dataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="CanUserResizeRows" Value="False" />
+            <Setter Property="CanUserResizeColumns" Value="False" />
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="Foreground" Value="#F7CE65" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#FFFEBD" />
+            <Setter Property="VerticalGridLinesBrush" Value="#FFFEBD" />
+        </Style>
 
-        <!--Menu Item-->
+        <!--DataGridCell-->
+        <Style x:Key="dataGridCellStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        
+        <!--Menu-->
+        <Style x:Key="menuStyle" TargetType="{x:Type Menu}">
+            <Setter Property="Foreground" Value="#F7CE65" />
+            <Setter Property="Background" Value="#290000" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Padding" Value="10,0,0,0" />
+        </Style>
+
+        <!--MenuItem-->
         <Style x:Key="menuItemStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -69,7 +102,7 @@
                                 </Grid>
                                 <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
                                 <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" >
-                                    <Border x:Name="SubMenuBorder" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}" BorderThickness="2">
+                                    <Border x:Name="SubMenuBorder" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}" BorderThickness="0">
                                         <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
                                             <!-- StackPanel holds children of the menu. This is set by IsItemsHost=True -->
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Background="#290000"/>
@@ -119,8 +152,5 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-        
     </Application.Resources>
 </Application>

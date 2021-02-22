@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DnD DM" Height="450" Width="800" Background="#030303">
     <Grid>
-        <Menu x:Name="mainMenu" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="10,0,0,0" FontWeight="Bold" Foreground="#F7CE65" Background="#290000">
+        <Menu x:Name="mainMenu" Style="{StaticResource menuStyle}">
             <MenuItem Header="Spells" Style="{StaticResource menuItemStyle}"/>
             <MenuItem Header="Items" Style="{StaticResource menuItemStyle}" FontWeight="Bold">
                 <MenuItem Header="Armor" Style="{StaticResource menuItemStyle}" Click="ShowArmorControl"/>
@@ -18,18 +18,7 @@
                 <MenuItem Header="Trinkets" Style="{StaticResource menuItemStyle}" Click="ShowTrinektsControl"/>
             </MenuItem>
         </Menu>
-        <!--<Menu x:Name="mainMenu" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="10,0,0,0" Background="#290000" Foreground="#F7CE65" FontWeight="Bold">
-            <MenuItem Header="Spells" Style="{StaticResource menuItemHeaderStyle}"/>
-            <MenuItem Header="Items" Style="{StaticResource menuItemHeaderStyle}">
-                <MenuItem Header="Armor" Style="{StaticResource menuItemSubStyle}" Click="ShowArmorControl"/>
-                <MenuItem Header="Art" Style="{StaticResource menuItemSubStyle}" Click="ShowArtControl"/>
-                <MenuItem Header="Gems" Style="{StaticResource menuItemSubStyle}" Click="ShowGemsControl"/>
-                <MenuItem Header="Goods" Style="{StaticResource menuItemSubStyle}" Click="ShowGoodsControl"/>
-                <MenuItem Header="Weapons" Style="{StaticResource menuItemSubStyle}" Click="ShowWeaponsControl"/>
-                <MenuItem Header="Trinkets" Style="{StaticResource menuItemSubStyle}" Click="ShowTrinektsControl"/>
-            </MenuItem>
-        </Menu>-->
-        <ContentControl x:Name="contentControl" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <ContentControl x:Name="contentControl" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,35,0,0" />
 
     </Grid>
 </Window>

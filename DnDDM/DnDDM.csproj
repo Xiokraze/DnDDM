@@ -64,6 +64,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\StandardItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,11 +77,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\DefaultValues.cs" />
+    <Compile Include="Classes\StandardItem.cs" />
+    <Compile Include="Classes\StandardItemLists.cs" />
     <Compile Include="Controls\HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SplashControl.xaml.cs">
       <DependentUpon>SplashControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StandardItemControl.xaml.cs">
+      <DependentUpon>StandardItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
